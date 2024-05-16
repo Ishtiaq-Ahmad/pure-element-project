@@ -1,17 +1,23 @@
 import { useEffect, useState } from 'react';
 import { fetchProducts } from './apiService';
+import { useDispatch } from 'react-redux';
+import { productHandler } from './store/productSlice';
+import Home from './pages/Home/Home';
 
 function App() {
-	const [products, setProducts] = useState([]);
+	const dispatch = useDispatch();
+
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	console.log('products', products);
 	useEffect(() => {
 		const getProducts = async () => {
 			try {
 				const productData = await fetchProducts();
-				setProducts(productData);
+				console.log('productData', productData);
+				const { data } = productData;
+				// setProducts(productData);
+				dispatch(productHandler(data));
 			} catch (error) {
 				setError('Failed to fetch products. Please try again later.');
 			} finally {
@@ -29,7 +35,11 @@ function App() {
 	if (error) {
 		return <div>{error}</div>;
 	}
-	return <>Hello react</>;
+	return (
+		<>
+			<Home />
+		</>
+	);
 }
 
 export default App;

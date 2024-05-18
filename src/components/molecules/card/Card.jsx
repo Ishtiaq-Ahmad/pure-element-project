@@ -16,8 +16,8 @@ const Card = ({ title, onSale, image, regularPrice, salePrice, variants }) => {
 	return (
 		<BoxComponent sx={{ width: '100%', height: 'auto' }}>
 			<ImageContainer>
-				<Image source={image} />
-				<Overlay>
+				<Image source={image} alt={title} />
+				<Overlay className="overlay">
 					{variants.map((item) => (
 						<BoxComponent key={item.id}>
 							<TypographyComp
@@ -70,8 +70,8 @@ Card.propTypes = {
 	title: PropTypes.string,
 	onSale: PropTypes.string,
 	image: PropTypes.string,
-	regularPrice: PropTypes.number,
-	salePrice: PropTypes.number,
+	regularPrice: PropTypes.any,
+	salePrice: PropTypes.any,
 	variants: PropTypes.array,
 };
 

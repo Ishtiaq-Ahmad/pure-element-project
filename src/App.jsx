@@ -28,16 +28,16 @@ function App() {
 		getProducts();
 	}, []);
 
-	if (loading) {
-		return <div>Loading...</div>;
-	}
+	// if (loading) {
+	// 	return <div>Loading...</div>;
+	// }
 
 	if (error) {
 		return <div>{error}</div>;
 	}
 	return (
 		<>
-			<Home />
+			<Home loading={loading} />
 		</>
 	);
 }

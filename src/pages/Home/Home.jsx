@@ -6,6 +6,7 @@ import SkeletonComponent from '../../components/atoms/skeletonComp/SkeletonCompo
 import Sidebar from '../../components/molecules/sidebar/Sidebar';
 import { sideBarModalHandler } from '../../store/productSlice';
 import { Button } from '@mui/material';
+import SidebarModal from './SidebarModal';
 
 const Home = ({ loading = true }) => {
 	const products = useSelector((state) => state.products.productData);
@@ -39,7 +40,9 @@ const Home = ({ loading = true }) => {
 					))}
 			</GridComp>
 
-			<Sidebar>helo containter</Sidebar>
+			<Sidebar>
+				<SidebarModal />
+			</Sidebar>
 		</div>
 	);
 };

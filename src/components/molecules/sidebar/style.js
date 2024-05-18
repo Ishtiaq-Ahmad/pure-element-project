@@ -25,3 +25,9 @@ export const OverlayBackground = styled('div')(() => ({
 	zIndex: 1000,
 	transition: 'opacity 0.5s',
 }));
+export const RotatingCloseButton = styled('div')(() => ({
+	transition: 'transform 0.1s ease',
+	'&amp;:hover': {
+		transform: 'rotate(180deg)',
+	},
+}));

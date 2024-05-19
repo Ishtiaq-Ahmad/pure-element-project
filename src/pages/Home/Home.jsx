@@ -1,26 +1,29 @@
 import { useDispatch, useSelector } from 'react-redux';
-import GridComp from '../../components/atoms/gridComp/GridComp';
-import Card from '../../components/molecules/card/Card';
 import PropTypes from 'prop-types';
-import SkeletonComponent from '../../components/atoms/skeletonComp/SkeletonComponent';
 
+import Card from '../../components/molecules/card/Card';
+import Menu from '../../components/molecules/menu/Menu';
+import GridComp from '../../components/atoms/gridComp/GridComp';
+import BoxComponent from '../../components/atoms/boxComp/BoxComponent';
+import SkeletonComponent from '../../components/atoms/skeletonComp/SkeletonComponent';
 import {
 	addToCardHandler,
 	sideBarModalHandler,
 } from '../../store/productSlice';
-
-import Menu from '../../components/molecules/menu/Menu';
-import BoxComponent from '../../components/atoms/boxComp/BoxComponent';
+import { useCallback } from 'react';
 
 const Home = ({ loading = true }) => {
-	const products = useSelector((state) => state.products.productData);
 	const dispatch = useDispatch();
+	const products = useSelector((state) => state.products.productData);
 	const skeletons = Array.from({ length: 10 });
 
-	const selectedProductHandler = (size, item) => {
-		dispatch(sideBarModalHandler(true));
-		dispatch(addToCardHandler({ ...item, size, quantity: 1 }));
-	};
+	const selectedProductHandler = useCallback(
+		(size, item) => {
+			dispatch(sideBarModalHandler(true));
+			dispatch(addToCardHandler({ ...item, size, quantity: 1 }));
+		},
+		[dispatch],
+	);
 	return (
 		<BoxComponent sx={{ pl: 3, pr: 3 }}>
 			<Menu />

@@ -1,27 +1,24 @@
-import { useEffect, useState } from 'react';
 import { fetchProducts } from './apiService';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { productHandler } from './store/productSlice';
+
 import Home from './pages/Home/Home';
+import { productHandler } from './store/productSlice';
 import Navbar from './components/molecules/navbar/Navbar';
 import Sidebar from './components/molecules/sidebar/Sidebar';
-import SidebarModal from './pages/Home/SidebarModal';
+import SidebarContent from './components/molecules/sidebarContent/SidebarContent';
 
 function App() {
 	const dispatch = useDispatch();
-
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		const getProducts = async () => {
 			try {
-				const productData = await fetchProducts();
-				console.log('productData', productData);
-				const { data } = productData;
-				// setProducts(productData);
+				const { data } = await fetchProducts();
 				dispatch(productHandler(data));
-			} catch (error) {
+			} catch (err) {
 				setError('Failed to fetch products. Please try again later.');
 			} finally {
 				setLoading(false);
@@ -29,21 +26,18 @@ function App() {
 		};
 
 		getProducts();
-	}, []);
-
-	// if (loading) {
-	// 	return <div>Loading...</div>;
-	// }
+	}, [dispatch]);
 
 	if (error) {
 		return <div>{error}</div>;
 	}
+
 	return (
 		<>
 			<Navbar />
 			<Home loading={loading} />
 			<Sidebar>
-				<SidebarModal />
+				<SidebarContent />
 			</Sidebar>
 		</>
 	);

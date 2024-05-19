@@ -1,29 +1,26 @@
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+
 import BoxComponent from '../../atoms/boxComp/BoxComponent';
+import { sideBarModalHandler } from '../../../store/productSlice';
+import IconButtonComp from '../../atoms/buttonComp/IconButtonComp';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import TypographyComp from '../../atoms/typographyComp/TypographyComp';
 import {
 	OverlayBackground,
 	RotatingCloseButton,
 	SidebarContainer,
 } from './style';
-import { useDispatch, useSelector } from 'react-redux';
-import { sideBarModalHandler } from '../../../store/productSlice';
-import IconButtonComp from '../../atoms/buttonComp/IconButtonComp';
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
-import TypographyComp from '../../atoms/typographyComp/TypographyComp';
 
 const Sidebar = ({ children }) => {
-	// const [isOpen, setIsOpen] = useState(false);
 	const dispatch = useDispatch();
 	const isOpen = useSelector((state) => state.products.sideBarModal);
 	const products = useSelector((state) => state.products.productAddToCard);
 
-	const toggleSidebar = () => {
-		// setIsOpen(!isOpen);
-		dispatch(sideBarModalHandler(!isOpen));
-	};
+	const toggleSidebar = () => dispatch(sideBarModalHandler(!isOpen));
+
 	return (
 		<>
-			{' '}
 			{isOpen && <OverlayBackground onClick={toggleSidebar} />}
 			<SidebarContainer isOpen={isOpen}>
 				<BoxComponent

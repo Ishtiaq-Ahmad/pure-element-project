@@ -1,20 +1,21 @@
+import { useMemo } from 'react';
 import { Stack } from '@mui/material';
-import Image from '../../components/atoms/imageComp/Image';
-import BoxComponent from '../../components/atoms/boxComp/BoxComponent';
-import TypographyComp from '../../components/atoms/typographyComp/TypographyComp';
-import IconButtonComp from '../../components/atoms/buttonComp/IconButtonComp';
+import Divider from '@mui/material/Divider';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-// import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useDispatch, useSelector } from 'react-redux';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+
+import Image from '../../atoms/imageComp/Image';
+import ButtonComp from '../../atoms/buttonComp/ButtonComp';
+import BoxComponent from '../../atoms/boxComp/BoxComponent';
+import IconButtonComp from '../../atoms/buttonComp/IconButtonComp';
+import TypographyComp from '../../atoms/typographyComp/TypographyComp';
 import {
 	decreaseQuantity,
 	increaseQuantity,
 	removeProduct,
-} from '../../store/productSlice';
-import Divider from '@mui/material/Divider';
-import ButtonComp from '../../components/atoms/buttonComp/ButtonComp';
+} from '../../../store/productSlice';
 
 const fontStyle = {
 	fontWeight: 600,
@@ -22,7 +23,7 @@ const fontStyle = {
 	lineHeight: '21px',
 };
 
-const SidebarModal = () => {
+const SidebarContent = () => {
 	const dispatch = useDispatch();
 	const products = useSelector((state) => state.products.productAddToCard);
 
@@ -37,17 +38,20 @@ const SidebarModal = () => {
 	const handleRemoveProduct = (id, size) => {
 		dispatch(removeProduct({ id, size }));
 	};
-	const totalPrice = products.reduce(
-		(total, product) => total + product.regular_price * product.quantity,
-		0,
-	);
+
+	const totalPrice = useMemo(() => {
+		return products.reduce(
+			(total, product) => total + product.regular_price * product.quantity,
+			0,
+		);
+	}, [products]);
+
 	return (
 		<div>
 			{products.length === 0 ? (
 				<BoxComponent
 					sx={{
 						display: 'flex',
-
 						height: '100px',
 						alignItems: 'center',
 						justifyContent: 'center',
@@ -76,7 +80,6 @@ const SidebarModal = () => {
 							sx={{
 								display: 'flex',
 								flexDirection: 'column',
-								// gap: 1,
 								alignItems: 'space-between',
 								justifyContent: 'space-between',
 								height: '100%',
@@ -120,12 +123,10 @@ const SidebarModal = () => {
 								>
 									<IconButtonComp
 										color="inherit"
+										disabled={item.quantity === 1 ? true : false}
 										onClick={() => handleDecreaseQuantity(item.id, item.size)}
 									>
-										<RemoveIcon
-											// fontSize="small"
-											sx={{ fontSize: '14px' }}
-										/>
+										<RemoveIcon sx={{ fontSize: '14px' }} />
 									</IconButtonComp>
 									<TypographyComp sx={fontStyle}>
 										{item.quantity}
@@ -194,4 +195,4 @@ const SidebarModal = () => {
 	);
 };
 
-export default SidebarModal;
+export default SidebarContent;

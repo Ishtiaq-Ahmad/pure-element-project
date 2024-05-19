@@ -7,8 +7,9 @@ export const ImageContainer = styled('div')(() => ({
 	height: 'auto',
 	cursor: 'pointer',
 	overflow: 'hidden',
+
 	// background: '#edecf2',
-	marginBottom: '-4px',
+	marginBottom: '4px',
 	'&amp;:hover .overlay': {
 		opacity: 1,
 	},

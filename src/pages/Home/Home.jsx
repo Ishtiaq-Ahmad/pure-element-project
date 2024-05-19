@@ -19,9 +19,9 @@ const Home = ({ loading = true }) => {
 	const buttonHandler = () => {
 		dispatch(sideBarModalHandler(true));
 	};
-	const selectedProductHandler = (value, item) => {
+	const selectedProductHandler = (size, item) => {
 		dispatch(sideBarModalHandler(true));
-		dispatch(addToCardHandler(item));
+		dispatch(addToCardHandler({ ...item, size, quantity: 1 }));
 	};
 	return (
 		<div>
@@ -42,9 +42,7 @@ const Home = ({ loading = true }) => {
 								regularPrice={item.regular_price}
 								salePrice={item.sale_price}
 								variants={item.variants}
-								productHandler={(value) =>
-									selectedProductHandler(value, item)
-								}
+								productHandler={(size) => selectedProductHandler(size, item)}
 							/>
 						</GridComp>
 					))}

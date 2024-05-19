@@ -1,6 +1,4 @@
-// import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import PropTypes from 'prop-types';
-// import { BackgroundImage } from './Card.style';
 import Image from '../../atoms/imageComp/Image';
 import { ImageContainer, Overlay, SaleBadge } from './Card.style';
 import TypographyComp from '../../atoms/typographyComp/TypographyComp';
@@ -16,11 +14,6 @@ const Card = ({
 	variants,
 	productHandler,
 }) => {
-	// const [isFavorite, setIsFavorite] = useState(false);
-
-	// const toggleFavorite = () => {
-	// 	setIsFavorite(!isFavorite);
-	// };
 	const tagsHandler = (quantity, size) => {
 		if (quantity > 0) productHandler(size);
 	};
@@ -34,7 +27,7 @@ const Card = ({
 						<BoxComponent key={item.id}>
 							<IconButtonComp
 								onClick={() => tagsHandler(item.quantity, item.size)}
-								disabled={item.quantity === 0 ? true : false}
+								disabled={item.quantity === 0}
 								size="small"
 								sx={{
 									width: '20px',
@@ -43,7 +36,7 @@ const Card = ({
 									padding: '0px',
 									textDecoration: item.quantity === 0 ? 'line-through' : 'none',
 									'&.Mui-disabled': {
-										color: '#ffffff', // White color when disabled
+										color: '#ffffff',
 									},
 								}}
 							>
@@ -53,10 +46,6 @@ const Card = ({
 					))}
 				</Overlay>
 				{onSale && <SaleBadge>on sale</SaleBadge>}
-
-				{/* <HeartButton onClick={toggleFavorite}>
-				{isFavorite ? <Favorite /> : <FavoriteBorder />}
-			</HeartButton> */}
 			</ImageContainer>
 			<TypographyComp
 				sx={{ fontSize: '14px', fontWeight: 500, lineHeight: '21px' }}

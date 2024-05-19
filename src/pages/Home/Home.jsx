@@ -21,7 +21,7 @@ const Home = ({ loading = true }) => {
 	};
 	const selectedProductHandler = (value, item) => {
 		dispatch(sideBarModalHandler(true));
-		dispatch(addToCardHandler(item, value));
+		dispatch(addToCardHandler(item));
 	};
 	return (
 		<div>

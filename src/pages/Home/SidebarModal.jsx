@@ -102,6 +102,8 @@ const SidebarModal = () => {
 					</BoxComponent>
 				</Stack>
 			))}
+
+			<TypographyComp>Total price</TypographyComp>
 		</div>
 	);
 };

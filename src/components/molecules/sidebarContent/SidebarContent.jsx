@@ -27,16 +27,16 @@ const SidebarContent = () => {
 	const dispatch = useDispatch();
 	const products = useSelector((state) => state.products.productAddToCard);
 
-	const handleIncreaseQuantity = (id, size) => {
-		dispatch(increaseQuantity({ id, size }));
+	const handleIncreaseQuantity = (uid) => {
+		dispatch(increaseQuantity({ uid }));
 	};
 
-	const handleDecreaseQuantity = (id, size) => {
-		dispatch(decreaseQuantity({ id, size }));
+	const handleDecreaseQuantity = (uid) => {
+		dispatch(decreaseQuantity({ uid }));
 	};
 
-	const handleRemoveProduct = (id, size) => {
-		dispatch(removeProduct({ id, size }));
+	const handleRemoveProduct = (uid) => {
+		dispatch(removeProduct({ uid }));
 	};
 
 	const totalPrice = useMemo(() => {
@@ -64,11 +64,11 @@ const SidebarContent = () => {
 					</TypographyComp>
 				</BoxComponent>
 			) : (
-				products.map((item, index) => (
+				products.map((item) => (
 					<Stack
 						spacing={2}
 						mb={4}
-						key={index}
+						key={item.uid}
 						direction="row"
 						alignItems={'center'}
 						sx={{ height: '140px' }}
@@ -104,7 +104,7 @@ const SidebarContent = () => {
 										...fontStyle,
 									}}
 								>
-									{item.size} {/* Display dynamic size */}
+									{item.size}
 								</BoxComponent>
 							</BoxComponent>
 							<Stack
@@ -123,26 +123,23 @@ const SidebarContent = () => {
 								>
 									<IconButtonComp
 										color="inherit"
-										disabled={item.quantity === 1 ? true : false}
-										onClick={() => handleDecreaseQuantity(item.id, item.size)}
+										disabled={item.quantity === 1}
+										onClick={() => handleDecreaseQuantity(item.uid)}
 									>
 										<RemoveIcon sx={{ fontSize: '14px' }} />
 									</IconButtonComp>
 									<TypographyComp sx={fontStyle}>
 										{item.quantity}
 									</TypographyComp>
-
 									<IconButtonComp
 										color="inherit"
-										onClick={() => handleIncreaseQuantity(item.id, item.size)}
+										onClick={() => handleIncreaseQuantity(item.uid)}
 									>
 										<AddIcon sx={{ fontSize: '14px' }} />
 									</IconButtonComp>
 								</BoxComponent>
 								<BoxComponent>
-									<IconButtonComp
-										onClick={() => handleRemoveProduct(item.id, item.size)}
-									>
+									<IconButtonComp onClick={() => handleRemoveProduct(item.uid)}>
 										<DeleteOutlineIcon fontSize="medium" />
 									</IconButtonComp>
 								</BoxComponent>
@@ -173,7 +170,6 @@ const SidebarContent = () => {
 				</TypographyComp>
 			</BoxComponent>
 			<Divider sx={{ mt: 1 }} />
-
 			<ButtonComp
 				fullWidth
 				sx={{
@@ -186,7 +182,7 @@ const SidebarContent = () => {
 					textTransform: 'capitalize',
 				}}
 			>
-				Checkout{' '}
+				Checkout
 			</ButtonComp>
 		</div>
 	);

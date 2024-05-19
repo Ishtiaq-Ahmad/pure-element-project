@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
-import Image from '../../atoms/imageComp/Image';
-import { ImageContainer, Overlay, SaleBadge } from './Card.style';
-import TypographyComp from '../../atoms/typographyComp/TypographyComp';
-import BoxComponent from '../../atoms/boxComp/BoxComponent';
-import IconButtonComp from '../../atoms/buttonComp/IconButtonComp';
 import { useEffect, useState } from 'react';
+
+import Image from '../../atoms/imageComp/Image';
+import BoxComponent from '../../atoms/boxComp/BoxComponent';
+import { ImageContainer, Overlay, SaleBadge } from './Card.style';
+import IconButtonComp from '../../atoms/buttonComp/IconButtonComp';
+import TypographyComp from '../../atoms/typographyComp/TypographyComp';
 
 const Card = ({
 	title,
@@ -24,6 +25,7 @@ const Card = ({
 		const allZero = variants.every((item) => item.quantity === 0);
 		setAllQuantitiesZero(allZero);
 	}, [variants]);
+
 	return (
 		<BoxComponent sx={{ width: '100%', height: 'auto' }}>
 			<ImageContainer>
@@ -89,10 +91,10 @@ const Card = ({
 
 Card.propTypes = {
 	title: PropTypes.string,
-	onSale: PropTypes.string,
+	onSale: PropTypes.bool,
 	image: PropTypes.string,
-	regularPrice: PropTypes.any,
-	salePrice: PropTypes.any,
+	regularPrice: PropTypes.number,
+	salePrice: PropTypes.number,
 	variants: PropTypes.array,
 	productHandler: PropTypes.func,
 };

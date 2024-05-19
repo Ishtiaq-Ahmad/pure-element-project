@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid'; // Install uuid: npm install uuid
 
 const initialState = {
 	productData: [],
@@ -17,39 +18,33 @@ export const productSlice = createSlice({
 			state.sideBarModal = action.payload;
 		},
 		addToCardHandler: (state, action) => {
-			state.productAddToCard = [...state.productAddToCard, action.payload];
+			const newProduct = { ...action.payload, uid: uuidv4() };
+			state.productAddToCard.push(newProduct);
 		},
-
 		increaseQuantity: (state, action) => {
 			const product = state.productAddToCard.find(
-				(item) =>
-					item.id === action.payload.id && item.size === action.payload.size,
+				(item) => item.uid === action.payload.uid,
 			);
 			if (product) {
 				product.quantity += 1;
 			}
 		},
-
 		decreaseQuantity: (state, action) => {
 			const product = state.productAddToCard.find(
-				(item) =>
-					item.id === action.payload.id && item.size === action.payload.size,
+				(item) => item.uid === action.payload.uid,
 			);
-			if (product && product.quantity > 0) {
+			if (product && product.quantity > 1) {
 				product.quantity -= 1;
 			}
 		},
-
 		removeProduct: (state, action) => {
 			state.productAddToCard = state.productAddToCard.filter(
-				(item) =>
-					!(item.id === action.payload.id && item.size === action.payload.size),
+				(item) => item.uid !== action.payload.uid,
 			);
 		},
 	},
 });
 
-// Action creators are generated for each case reducer function
 export const {
 	productHandler,
 	sideBarModalHandler,

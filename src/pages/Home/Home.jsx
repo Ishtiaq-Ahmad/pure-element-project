@@ -31,7 +31,7 @@ const Home = ({ loading = true }) => {
 				{loading
 					? skeletons.map((_, index) => (
 						<GridComp key={index} item xs={6} sm={4} lg={3} xl={2}>
-							<SkeletonComponent height="380px" variant="rounded" />
+							<SkeletonComponent height="350px" variant="rounded" />
 						</GridComp>
 					))
 					: products.map((item) => (

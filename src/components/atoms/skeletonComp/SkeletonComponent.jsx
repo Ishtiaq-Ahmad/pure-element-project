@@ -11,6 +11,7 @@ const SkeletonComponent = ({
 	return (
 		<>
 			<Skeleton
+				animation="wave"
 				variant={variant}
 				width={width}
 				height={height}

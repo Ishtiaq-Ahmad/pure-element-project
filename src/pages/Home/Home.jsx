@@ -4,7 +4,10 @@ import Card from '../../components/molecules/card/Card';
 import PropTypes from 'prop-types';
 import SkeletonComponent from '../../components/atoms/skeletonComp/SkeletonComponent';
 import Sidebar from '../../components/molecules/sidebar/Sidebar';
-import { sideBarModalHandler } from '../../store/productSlice';
+import {
+	addToCardHandler,
+	sideBarModalHandler,
+} from '../../store/productSlice';
 import { Button } from '@mui/material';
 import SidebarModal from './SidebarModal';
 
@@ -15,6 +18,11 @@ const Home = ({ loading = true }) => {
 
 	const buttonHandler = () => {
 		dispatch(sideBarModalHandler(true));
+	};
+	const selectedProductHandler = (value, item) => {
+		console.log('value', value);
+		console.log('item', item);
+		dispatch(addToCardHandler(item));
 	};
 	return (
 		<div>
@@ -35,6 +43,9 @@ const Home = ({ loading = true }) => {
 								regularPrice={item.regular_price}
 								salePrice={item.sale_price}
 								variants={item.variants}
+								productHandler={(value) =>
+									selectedProductHandler(value, item)
+								}
 							/>
 						</GridComp>
 					))}

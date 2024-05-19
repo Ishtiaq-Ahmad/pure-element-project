@@ -5,13 +5,25 @@ import Image from '../../atoms/imageComp/Image';
 import { ImageContainer, Overlay, SaleBadge } from './Card.style';
 import TypographyComp from '../../atoms/typographyComp/TypographyComp';
 import BoxComponent from '../../atoms/boxComp/BoxComponent';
+import IconButtonComp from '../../atoms/buttonComp/IconButtonComp';
 
-const Card = ({ title, onSale, image, regularPrice, salePrice, variants }) => {
+const Card = ({
+	title,
+	onSale,
+	image,
+	regularPrice,
+	salePrice,
+	variants,
+	productHandler,
+}) => {
 	// const [isFavorite, setIsFavorite] = useState(false);
 
 	// const toggleFavorite = () => {
 	// 	setIsFavorite(!isFavorite);
 	// };
+	const tagsHandler = (value) => {
+		productHandler(value);
+	};
 
 	return (
 		<BoxComponent sx={{ width: '100%', height: 'auto' }}>
@@ -20,13 +32,19 @@ const Card = ({ title, onSale, image, regularPrice, salePrice, variants }) => {
 				<Overlay className="overlay">
 					{variants.map((item) => (
 						<BoxComponent key={item.id}>
-							<TypographyComp
+							<IconButtonComp
+								onClick={() => tagsHandler(item.id)}
+								size="small"
 								sx={{
+									width: '20px',
+									height: '20px',
+									color: '#ffffff',
+									padding: '0px',
 									textDecoration: item.quantity === 0 ? 'line-through' : 'none',
 								}}
 							>
 								{item.size}
-							</TypographyComp>
+							</IconButtonComp>
 						</BoxComponent>
 					))}
 				</Overlay>
@@ -73,6 +91,7 @@ Card.propTypes = {
 	regularPrice: PropTypes.any,
 	salePrice: PropTypes.any,
 	variants: PropTypes.array,
+	productHandler: PropTypes.func,
 };
 
 export default Card;

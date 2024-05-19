@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
 	productData: [],
 	sideBarModal: false,
+	productAddToCard: [],
 };
 
 export const productSlice = createSlice({
@@ -15,10 +16,14 @@ export const productSlice = createSlice({
 		sideBarModalHandler: (state, action) => {
 			state.sideBarModal = action.payload;
 		},
+		addToCardHandler: (state, action) => {
+			state.productAddToCard = [...state.productAddToCard, action.payload];
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { productHandler, sideBarModalHandler } = productSlice.actions;
+export const { productHandler, sideBarModalHandler, addToCardHandler } =
+	productSlice.actions;
 
 export default productSlice.reducer;

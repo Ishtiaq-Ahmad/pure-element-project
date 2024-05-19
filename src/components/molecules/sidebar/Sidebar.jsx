@@ -15,6 +15,7 @@ const Sidebar = ({ children }) => {
 	// const [isOpen, setIsOpen] = useState(false);
 	const dispatch = useDispatch();
 	const isOpen = useSelector((state) => state.products.sideBarModal);
+	const products = useSelector((state) => state.products.productAddToCard);
 
 	const toggleSidebar = () => {
 		// setIsOpen(!isOpen);
@@ -32,11 +33,13 @@ const Sidebar = ({ children }) => {
 						alignItems: 'center',
 					}}
 				>
-					<TypographyComp sx={{ fontSize: '16px', lineHeight: '24px' }}>
+					<TypographyComp
+						sx={{ fontSize: '16px', lineHeight: '24px', fontWeight: 400 }}
+					>
 						<span
-							style={{ fontSize: '18px', fontWeight: 500, lineHeight: '27px' }}
+							style={{ fontSize: '18px', fontWeight: 600, lineHeight: '27px' }}
 						>
-							1
+							{products.length}
 						</span>{' '}
 						Product added to your basket
 					</TypographyComp>

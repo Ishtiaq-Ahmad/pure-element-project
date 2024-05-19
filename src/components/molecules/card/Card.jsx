@@ -21,8 +21,8 @@ const Card = ({
 	// const toggleFavorite = () => {
 	// 	setIsFavorite(!isFavorite);
 	// };
-	const tagsHandler = (value) => {
-		productHandler(value);
+	const tagsHandler = (quantity, size) => {
+		if (quantity > 0) productHandler(size);
 	};
 
 	return (
@@ -33,7 +33,8 @@ const Card = ({
 					{variants.map((item) => (
 						<BoxComponent key={item.id}>
 							<IconButtonComp
-								onClick={() => tagsHandler(item.id)}
+								onClick={() => tagsHandler(item.quantity, item.size)}
+								disabled={item.quantity === 0 ? true : false}
 								size="small"
 								sx={{
 									width: '20px',
@@ -41,6 +42,9 @@ const Card = ({
 									color: '#ffffff',
 									padding: '0px',
 									textDecoration: item.quantity === 0 ? 'line-through' : 'none',
+									'&.Mui-disabled': {
+										color: '#ffffff', // White color when disabled
+									},
 								}}
 							>
 								{item.size}

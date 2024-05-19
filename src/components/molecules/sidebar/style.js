@@ -6,7 +6,7 @@ export const SidebarContainer = styled('div')(({ isOpen = true }) => ({
 	right: -10,
 	height: '100%',
 	padding: '10px',
-	width: isOpen ? '400px' : '0px',
+	width: isOpen ? '30vw' : '0vw',
 	backgroundColor: '#ffffff',
 	overflowX: 'hidden',
 	transition: '0.5s',

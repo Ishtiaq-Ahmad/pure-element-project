@@ -20,9 +20,8 @@ const Home = ({ loading = true }) => {
 		dispatch(sideBarModalHandler(true));
 	};
 	const selectedProductHandler = (value, item) => {
-		console.log('value', value);
-		console.log('item', item);
-		dispatch(addToCardHandler(item));
+		dispatch(sideBarModalHandler(true));
+		dispatch(addToCardHandler(item, value));
 	};
 	return (
 		<div>

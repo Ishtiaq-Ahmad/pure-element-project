@@ -9,48 +9,92 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useSelector } from 'react-redux';
 
+const fontStyle = {
+	fontWeight: 600,
+	fontSize: '14px',
+	lineHeight: '21px',
+};
+
 const SidebarModal = () => {
 	const products = useSelector((state) => state.products.productAddToCard);
+
 	return (
 		<div>
 			{products.map((item, index) => (
-				<Stack spacing={2} key={index} direction="row">
-					<BoxComponent>
+				<Stack
+					spacing={2}
+					mb={4}
+					key={index}
+					direction="row"
+					alignItems={'center'}
+					sx={{ height: '140px' }}
+				>
+					<BoxComponent sx={{ width: '140px' }}>
 						<Image source={item.cover_image} alt={item.title} />
 					</BoxComponent>
-					<BoxComponent>
-						<TypographyComp>{item.title}</TypographyComp>
-						<TypographyComp>{item.regular_price}</TypographyComp>
+					<BoxComponent
+						sx={{
+							display: 'flex',
+							flexDirection: 'column',
+							// gap: 1,
+							alignItems: 'space-between',
+							justifyContent: 'space-between',
+							height: '100%',
+							width: '100%',
+						}}
+					>
+						<TypographyComp
+							sx={{ fontWeight: 500, fontSize: '15px', lineHeight: '23px' }}
+						>
+							{item.title}
+						</TypographyComp>
+						<TypographyComp sx={fontStyle}>
+							{item.regular_price} USD
+						</TypographyComp>
 						<BoxComponent
 							sx={{ display: 'flex', justifyContent: 'flex-start', gap: 2 }}
 						>
-							<BoxComponent sx={{ p: '0px 4px', border: '1px solid black' }}>
+							<BoxComponent
+								sx={{
+									p: '0px 7px',
+									border: '.5px solid #e6e1e1',
+									...fontStyle,
+								}}
+							>
 								S
 							</BoxComponent>
 						</BoxComponent>
-						<Stack direction={'row'} justifyContent={'space-between'}>
+						<Stack
+							direction={'row'}
+							justifyContent={'space-between'}
+							alignItems={'center'}
+						>
 							<BoxComponent
 								sx={{
 									display: 'flex',
 									alignItems: 'center',
-									border: '1px solid black',
+									border: '.5px solid #9b9a9a',
+									height: '25px',
 									gap: 1,
 								}}
 							>
 								<IconButtonComp color="inherit">
-									<RemoveIcon fontSize="small" />
+									<RemoveIcon
+										// fontSize="small"
+										sx={{ fontSize: '14px' }}
+									/>
 								</IconButtonComp>
-								<TypographyComp>1</TypographyComp>
+								<TypographyComp sx={fontStyle}>1</TypographyComp>
 
 								<IconButtonComp color="inherit">
-									<AddIcon fontSize="small" />
+									<AddIcon sx={{ fontSize: '14px' }} />
 								</IconButtonComp>
 							</BoxComponent>
 							<BoxComponent>
-								<IconButtonComp color="inherit">
+								<IconButtonComp>
 									<DeleteOutlineIcon fontSize="medium" />
 								</IconButtonComp>
-								<IconButtonComp color="inherit">
+								<IconButtonComp>
 									<FavoriteIcon fontSize="medium" />
 								</IconButtonComp>
 							</BoxComponent>

@@ -3,6 +3,9 @@ import { fetchProducts } from './apiService';
 import { useDispatch } from 'react-redux';
 import { productHandler } from './store/productSlice';
 import Home from './pages/Home/Home';
+import Navbar from './components/molecules/navbar/Navbar';
+import Sidebar from './components/molecules/sidebar/Sidebar';
+import SidebarModal from './pages/Home/SidebarModal';
 
 function App() {
 	const dispatch = useDispatch();
@@ -37,7 +40,11 @@ function App() {
 	}
 	return (
 		<>
+			<Navbar />
 			<Home loading={loading} />
+			<Sidebar>
+				<SidebarModal />
+			</Sidebar>
 		</>
 	);
 }

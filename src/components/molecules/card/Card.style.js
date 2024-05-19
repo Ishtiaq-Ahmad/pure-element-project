@@ -7,7 +7,7 @@ export const ImageContainer = styled('div')(() => ({
 	height: 'auto',
 	cursor: 'pointer',
 	overflow: 'hidden',
-	background: '#edecf2',
+	// background: '#edecf2',
 	marginBottom: '-4px',
 	'&amp;:hover .overlay': {
 		opacity: 1,
@@ -26,7 +26,7 @@ export const Overlay = styled('div')(() => ({
 	justifyContent: 'space-between',
 	color: '#ffffff',
 	padding: '10px 20px',
-	marginBottom: '5px',
+	marginBottom: '4px',
 	opacity: 0,
 	transition: 'opacity 0.8s ease, background-color 0.5s ease',
 	// '&amp;:hover': {
@@ -34,12 +34,12 @@ export const Overlay = styled('div')(() => ({
 	// },
 }));
 
-export const SaleBadge = styled('div')(({ onSale = true }) => ({
+export const SaleBadge = styled('div')(({ allQuantitiesZero }) => ({
 	position: 'absolute',
 	top: 5,
 	left: 5,
-	backgroundColor: onSale ? '#ffffff' : '#000000',
-	color: onSale ? '#000000' : '#ffffff',
+	backgroundColor: allQuantitiesZero ? '#000000' : '#ffffff',
+	color: allQuantitiesZero ? '#ffffff' : '#000000',
 	fontSize: '10px',
 	fontWeight: 500,
 	lineHeight: '15px',

@@ -4,6 +4,7 @@ import { ImageContainer, Overlay, SaleBadge } from './Card.style';
 import TypographyComp from '../../atoms/typographyComp/TypographyComp';
 import BoxComponent from '../../atoms/boxComp/BoxComponent';
 import IconButtonComp from '../../atoms/buttonComp/IconButtonComp';
+import { useEffect, useState } from 'react';
 
 const Card = ({
 	title,
@@ -14,10 +15,15 @@ const Card = ({
 	variants,
 	productHandler,
 }) => {
+	const [allQuantitiesZero, setAllQuantitiesZero] = useState(false);
 	const tagsHandler = (quantity, size) => {
 		if (quantity > 0) productHandler(size);
 	};
 
+	useEffect(() => {
+		const allZero = variants.every((item) => item.quantity === 0);
+		setAllQuantitiesZero(allZero);
+	}, [variants]);
 	return (
 		<BoxComponent sx={{ width: '100%', height: 'auto' }}>
 			<ImageContainer>
@@ -45,7 +51,11 @@ const Card = ({
 						</BoxComponent>
 					))}
 				</Overlay>
-				{onSale && <SaleBadge>on sale</SaleBadge>}
+				{onSale && (
+					<SaleBadge allQuantitiesZero={allQuantitiesZero}>
+						{allQuantitiesZero ? 'Sold out' : 'on sale'}
+					</SaleBadge>
+				)}
 			</ImageContainer>
 			<TypographyComp
 				sx={{ fontSize: '14px', fontWeight: 500, lineHeight: '21px' }}

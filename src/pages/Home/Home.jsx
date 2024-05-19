@@ -3,29 +3,27 @@ import GridComp from '../../components/atoms/gridComp/GridComp';
 import Card from '../../components/molecules/card/Card';
 import PropTypes from 'prop-types';
 import SkeletonComponent from '../../components/atoms/skeletonComp/SkeletonComponent';
-import Sidebar from '../../components/molecules/sidebar/Sidebar';
+
 import {
 	addToCardHandler,
 	sideBarModalHandler,
 } from '../../store/productSlice';
-import { Button } from '@mui/material';
-import SidebarModal from './SidebarModal';
+
+import Menu from '../../components/molecules/menu/Menu';
+import BoxComponent from '../../components/atoms/boxComp/BoxComponent';
 
 const Home = ({ loading = true }) => {
 	const products = useSelector((state) => state.products.productData);
 	const dispatch = useDispatch();
 	const skeletons = Array.from({ length: 10 });
 
-	const buttonHandler = () => {
-		dispatch(sideBarModalHandler(true));
-	};
 	const selectedProductHandler = (size, item) => {
 		dispatch(sideBarModalHandler(true));
 		dispatch(addToCardHandler({ ...item, size, quantity: 1 }));
 	};
 	return (
-		<div>
-			<Button onClick={buttonHandler}>click me</Button>
+		<BoxComponent sx={{ pl: 3, pr: 3 }}>
+			<Menu />
 			<GridComp container spacing={3}>
 				{loading
 					? skeletons.map((_, index) => (
@@ -47,11 +45,7 @@ const Home = ({ loading = true }) => {
 						</GridComp>
 					))}
 			</GridComp>
-
-			<Sidebar>
-				<SidebarModal />
-			</Sidebar>
-		</div>
+		</BoxComponent>
 	);
 };
 Home.propTypes = {

@@ -7,6 +7,8 @@ const Image = ({
 	alt,
 	source,
 	borderRadius,
+	width = '100%',
+	height = 'auto',
 	...props
 }) => {
 	return (
@@ -14,9 +16,9 @@ const Image = ({
 			{...props}
 			style={{ objectFit, borderRadius }}
 			alt={alt}
-			height="auto"
+			height={height}
 			src={source}
-			width="100%"
+			width={width}
 			effect="blur"
 		/>
 	);

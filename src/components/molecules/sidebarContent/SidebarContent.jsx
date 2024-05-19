@@ -145,9 +145,6 @@ const SidebarContent = () => {
 									>
 										<DeleteOutlineIcon fontSize="medium" />
 									</IconButtonComp>
-									{/* <IconButtonComp>
-									<FavoriteIcon fontSize="medium" />
-								</IconButtonComp> */}
 								</BoxComponent>
 							</Stack>
 						</BoxComponent>

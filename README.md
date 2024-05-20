@@ -1,6 +1,6 @@
 # Pure Element Project
 
-This is the Pure Element Project, a React.js application built using Vite. This project demonstrates modern web development practices and technologies.
+This is the Pure Element Project, a React.js application developed using Vite. This project was undertaken as a coding challenge for an interview selection process, demonstrating my skills and adherence to modern web development practices and technologies.
 
 # Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Follow these simple steps to get started.
